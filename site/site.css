@@ -198,8 +198,8 @@ h1 {
 
 .hero-art img {
   display: block;
-  width: 100%;
-  border-radius: 14px;
+  width: min(100%, 520px);
+  margin: 0 auto;
 }
 
 /* ---------- Sections ---------- */
