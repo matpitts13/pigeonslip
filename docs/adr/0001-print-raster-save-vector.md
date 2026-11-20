@@ -5,7 +5,7 @@
 
 ## Context
 
-Labelsheet has to send label sheets to whatever printer the user has, at exactly 4 × 6 in per label, and also offer a saved PDF. Inputs are untrusted PDFs (often one label on a full letter page) and pictures. The app is Electron, with a sandboxed renderer and no Node in the window.
+Pigeonslip has to send label sheets to whatever printer the user has, at exactly 4 × 6 in per label, and also offer a saved PDF. Inputs are untrusted PDFs (often one label on a full letter page) and pictures. The app is Electron, with a sandboxed renderer and no Node in the window.
 
 ## Options considered
 

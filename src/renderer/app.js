@@ -1,4 +1,4 @@
-// Labelsheet window: add files, see them laid out on sheets, print or save.
+// Pigeonslip window: add files, see them laid out on sheets, print or save.
 import * as PDFLib from "../vendor/pdf-lib/pdf-lib.esm.min.js";
 import { composePdf } from "../shared/compose.js";
 import { LABEL, PAPERS, paginate, placeInSlot, planSheet } from "../shared/layout.js";
@@ -75,14 +75,14 @@ el.guides.checked = prefs.guides !== false;
 
 function loadPrefs() {
   try {
-    return JSON.parse(localStorage.getItem("labelsheet.prefs") ?? "{}") ?? {};
+    return JSON.parse(localStorage.getItem("pigeonslip.prefs") ?? "{}") ?? {};
   } catch {
     return {};
   }
 }
 function savePrefs() {
   try {
-    localStorage.setItem("labelsheet.prefs", JSON.stringify({ paper: el.paper.value, trim: el.trim.checked, guides: el.guides.checked }));
+    localStorage.setItem("pigeonslip.prefs", JSON.stringify({ paper: el.paper.value, trim: el.trim.checked, guides: el.guides.checked }));
   } catch {
     // storage unavailable: settings just won't be remembered
   }

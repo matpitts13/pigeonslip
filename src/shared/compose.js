@@ -28,8 +28,8 @@ export async function composePdf(PDFLib, labels, paper, opts = {}) {
   const { PDFDocument, degrees, rgb } = PDFLib;
   const out = await PDFDocument.create();
   out.setTitle("Shipping labels");
-  out.setCreator("Labelsheet");
-  out.setProducer("Labelsheet");
+  out.setCreator("Pigeonslip");
+  out.setProducer("Pigeonslip");
   const plan = planSheet(paper);
   if (plan.perSheet < 1) throw new Error("A 4 × 6 in label doesn't fit on this paper.");
 

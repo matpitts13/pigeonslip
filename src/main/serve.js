@@ -1,4 +1,4 @@
-// Which files the window may load over app://labelsheet/. No Electron imports,
+// Which files the window may load over app://pigeonslip/. No Electron imports,
 // so the tests can check it directly.
 import path from "node:path";
 
@@ -31,7 +31,7 @@ export function resolveAppUrl(href, served) {
   } catch {
     return null;
   }
-  if (url.protocol !== "app:" || url.host !== "labelsheet") return null;
+  if (url.protocol !== "app:" || url.host !== "pigeonslip") return null;
   let pathname;
   try {
     pathname = decodeURIComponent(url.pathname);

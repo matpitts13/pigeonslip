@@ -13,9 +13,9 @@ const env = { ...process.env };
 delete env.ELECTRON_RUN_AS_NODE;
 const smoke = process.argv.indexOf("--smoke");
 if (smoke >= 0) {
-  env.LABELSHEET_SMOKE = path.join(root, ".smoke", "smoke.png");
-  env.LABELSHEET_USER_DATA = path.join(root, ".smoke", "profile");
-  env.LABELSHEET_SMOKE_FILES = process.argv.slice(smoke + 1).map((f) => path.resolve(f)).join("|");
+  env.PIGEONSLIP_SMOKE = path.join(root, ".smoke", "smoke.png");
+  env.PIGEONSLIP_USER_DATA = path.join(root, ".smoke", "profile");
+  env.PIGEONSLIP_SMOKE_FILES = process.argv.slice(smoke + 1).map((f) => path.resolve(f)).join("|");
   const fs = await import("node:fs");
   fs.mkdirSync(path.join(root, ".smoke"), { recursive: true });
 }

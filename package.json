@@ -1,5 +1,5 @@
 {
-  "name": "labelsheet",
+  "name": "pigeonslip",
   "version": "0.1.0",
   "private": true,
   "description": "A free desktop app that prints shipping labels at the standard 4 x 6 in size, as many per sheet as fit. Drop in label PDFs or pictures, check the preview, print.",
@@ -27,8 +27,8 @@
     "vitest": "5.1.1"
   },
   "build": {
-    "appId": "app.labelsheet",
-    "productName": "Labelsheet",
+    "appId": "app.pigeonslip",
+    "productName": "Pigeonslip",
     "directories": {
       "output": "dist"
     },
@@ -53,11 +53,11 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "shortcutName": "Labelsheet",
-      "artifactName": "Labelsheet-Setup-${version}.${ext}"
+      "shortcutName": "Pigeonslip",
+      "artifactName": "Pigeonslip-Setup-${version}.${ext}"
     },
     "portable": {
-      "artifactName": "Labelsheet-${version}-portable.${ext}"
+      "artifactName": "Pigeonslip-${version}-portable.${ext}"
     }
   }
 }

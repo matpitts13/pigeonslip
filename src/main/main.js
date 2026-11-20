@@ -1,4 +1,4 @@
-// Labelsheet: main process. Serves the window's files from app://labelsheet/
+// Pigeonslip: main process. Serves the window's files from app://pigeonslip/
 // (ES modules under a strict Content Security Policy) and registers the two
 // IPC channels in ipc.js. Nothing in the window touches the disk directly.
 import { app, BrowserWindow, net, protocol } from "electron";
@@ -11,7 +11,7 @@ const SRC = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ROOT = path.join(SRC, "..");
 const SERVED = servedFolders(SRC, ROOT);
 
-if (process.env.LABELSHEET_USER_DATA) app.setPath("userData", process.env.LABELSHEET_USER_DATA);
+if (process.env.PIGEONSLIP_USER_DATA) app.setPath("userData", process.env.PIGEONSLIP_USER_DATA);
 
 protocol.registerSchemesAsPrivileged([{ scheme: "app", privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
 
@@ -29,7 +29,7 @@ function createWindow() {
     height: 820,
     minWidth: 760,
     minHeight: 540,
-    title: "Labelsheet",
+    title: "Pigeonslip",
     icon: path.join(ROOT, "build", "icon.png"),
     autoHideMenuBar: true,
     webPreferences: {
@@ -43,8 +43,8 @@ function createWindow() {
   // The window never opens popups or navigates away (a stray drop would otherwise open the file).
   win.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
   win.webContents.on("will-navigate", (e) => e.preventDefault());
-  win.loadURL("app://labelsheet/renderer/index.html");
-  if (process.env.LABELSHEET_SMOKE) smokeTest(win, process.env.LABELSHEET_SMOKE, process.env.LABELSHEET_SMOKE_FILES);
+  win.loadURL("app://pigeonslip/renderer/index.html");
+  if (process.env.PIGEONSLIP_SMOKE) smokeTest(win, process.env.PIGEONSLIP_SMOKE, process.env.PIGEONSLIP_SMOKE_FILES);
 }
 
 /**
@@ -79,7 +79,7 @@ function smokeTest(win, outFile, files) {
       );
       if (shown) problems.push(`app showed an error: ${shown}`);
       // The print path, minus the dialog: same sheets and options, sent to a PDF instead of a printer.
-      for (const paperId of (process.env.LABELSHEET_SMOKE_PAPERS || "letter").split(",")) {
+      for (const paperId of (process.env.PIGEONSLIP_SMOKE_PAPERS || "letter").split(",")) {
         await win.webContents.executeJavaScript(`window.__smokePreparePrint(${JSON.stringify(paperId)})`);
         const pdf = await win.webContents.printToPDF({ printBackground: true, margins: { marginType: "none" }, preferCSSPageSize: true });
         fs.writeFileSync(outFile.replace(/\.png$/, `-print-${paperId}.pdf`), pdf);
@@ -92,9 +92,9 @@ function smokeTest(win, outFile, files) {
   });
 }
 
-app.setAppUserModelId("app.labelsheet");
+app.setAppUserModelId("app.pigeonslip");
 
-if (!process.env.LABELSHEET_SMOKE && !app.requestSingleInstanceLock()) app.exit(0);
+if (!process.env.PIGEONSLIP_SMOKE && !app.requestSingleInstanceLock()) app.exit(0);
 app.on("second-instance", () => {
   const win = BrowserWindow.getAllWindows()[0];
   if (win) {

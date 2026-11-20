@@ -8,19 +8,19 @@ const served = servedFolders(SRC, path.resolve("/app"));
 
 describe("resolveAppUrl", () => {
   it("serves the window's own files and the two vendored libraries", () => {
-    expect(resolveAppUrl("app://labelsheet/renderer/index.html", served)).toBe(path.join(SRC, "renderer", "index.html"));
-    expect(resolveAppUrl("app://labelsheet/vendor/pdfjs/build/pdf.mjs", served)).toBe(path.resolve("/app/node_modules/pdfjs-dist/build/pdf.mjs"));
-    expect(resolveAppUrl("app://labelsheet/vendor/pdf-lib/pdf-lib.esm.min.js", served)).toBe(path.resolve("/app/node_modules/pdf-lib/dist/pdf-lib.esm.min.js"));
+    expect(resolveAppUrl("app://pigeonslip/renderer/index.html", served)).toBe(path.join(SRC, "renderer", "index.html"));
+    expect(resolveAppUrl("app://pigeonslip/vendor/pdfjs/build/pdf.mjs", served)).toBe(path.resolve("/app/node_modules/pdfjs-dist/build/pdf.mjs"));
+    expect(resolveAppUrl("app://pigeonslip/vendor/pdf-lib/pdf-lib.esm.min.js", served)).toBe(path.resolve("/app/node_modules/pdf-lib/dist/pdf-lib.esm.min.js"));
   });
 
   it.each([
-    "app://labelsheet/main/main.js",
-    "app://labelsheet/renderer/../main/ipc.js",
-    "app://labelsheet/renderer/..%2F..%2Fpackage.json",
-    "app://labelsheet/renderer/%2e%2e/main/ipc.js",
-    "app://labelsheet/vendor/pdfjs/../electron/index.js",
+    "app://pigeonslip/main/main.js",
+    "app://pigeonslip/renderer/../main/ipc.js",
+    "app://pigeonslip/renderer/..%2F..%2Fpackage.json",
+    "app://pigeonslip/renderer/%2e%2e/main/ipc.js",
+    "app://pigeonslip/vendor/pdfjs/../electron/index.js",
     "app://other/renderer/index.html",
-    "app://labelsheet/renderer/%E0%A4%A",
+    "app://pigeonslip/renderer/%E0%A4%A",
     "file:///etc/passwd",
     "not a url",
   ])("refuses %s", (href) => {

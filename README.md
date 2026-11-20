@@ -1,8 +1,8 @@
-# Labelsheet
+# Pigeonslip
 
 A free Windows app that prints shipping labels at the standard USPS 4 × 6 in size, fitting as many as it can on each sheet.
 
-Shipping label downloads from TikTok Shop, eBay, Etsy and others often put one label on a full letter page. Printed as-is, the label comes out too big to tape on a package. Labelsheet trims each label to its printed area, sizes it to exactly 4 × 6 in, and puts two on each letter sheet with dashed cut lines.
+Shipping label downloads from TikTok Shop, eBay, Etsy and others often put one label on a full letter page. Printed as-is, the label comes out too big to tape on a package. Pigeonslip trims each label to its printed area, sizes it to exactly 4 × 6 in, and puts two on each letter sheet with dashed cut lines.
 
 ## Use it
 
