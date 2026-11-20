@@ -2,7 +2,7 @@
 
 # Pigeonslip
 
-**Website:** https://pigeonslip.ravenburst.com · **Download:** [latest release](https://github.com/matpitts13/pigeonslip/releases/latest)
+**Website:** https://pigeonslip.ravenburst.com · **Download:** [Pigeonslip-Portable.exe](https://github.com/matpitts13/pigeonslip/releases/latest/download/Pigeonslip-Portable.exe) (or the [installer](https://github.com/matpitts13/pigeonslip/releases/latest/download/Pigeonslip-Setup.exe))
 
 A free Windows app that prints shipping labels at the standard USPS 4 × 6 in size, fitting as many as it can on each sheet.
 

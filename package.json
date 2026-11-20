@@ -54,10 +54,10 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "shortcutName": "Pigeonslip",
-      "artifactName": "Pigeonslip-Setup-${version}.${ext}"
+      "artifactName": "Pigeonslip-Setup.${ext}"
     },
     "portable": {
-      "artifactName": "Pigeonslip-${version}-portable.${ext}"
+      "artifactName": "Pigeonslip-Portable.${ext}"
     }
   }
 }
