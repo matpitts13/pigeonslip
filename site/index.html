@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pigeonslip: print shipping labels at 4 × 6 in, two to a page</title>
+    <meta name="description" content="A free Windows app that trims TikTok Shop, eBay, Etsy and Pirate Ship label PDFs to the standard 4 × 6 in USPS size and fits as many as it can on each sheet." />
+    <link rel="canonical" href="https://pigeonslip.ravenburst.com/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0e0f11" />
+    <meta property="og:title" content="Pigeonslip" />
+    <meta property="og:description" content="Print shipping labels at 4 × 6 in, as many per sheet as fit. Free for Windows." />
+    <meta property="og:image" content="https://pigeonslip.ravenburst.com/pigeon.jpg" />
+    <meta property="og:url" content="https://pigeonslip.ravenburst.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/site.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="top">
+      <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />Pigeonslip</a>
+      <nav aria-label="Site">
+        <a href="https://github.com/matpitts13/pigeonslip">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-text">
+          <h1>Print shipping labels at 4 × 6, two to a page.</h1>
+          <p class="lede">
+            Label downloads from TikTok Shop, eBay and Etsy often put one label on a whole letter page, too big to tape on a box.
+            Drop them into Pigeonslip. It trims each one to the standard USPS 4 × 6 in size and fits as many as it can on each sheet.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://github.com/matpitts13/pigeonslip/releases/latest">Download for Windows</a>
+            <a class="btn" href="https://github.com/matpitts13/pigeonslip">Source code</a>
+            <a class="gps" href="https://www.google.com/preferences/source?q=pigeonslip.ravenburst.com">
+              <img
+                src="/badges/google-preferred-source-dark.png"
+                srcset="/badges/google-preferred-source-dark.png 1x, /badges/google-preferred-source-dark@2x.png 2x"
+                alt="Add as a preferred source on Google"
+                height="40"
+              />
+            </a>
+          </div>
+          <p class="fine">Free and open source (MIT). Windows 10 and 11. No account, no ads.</p>
+        </div>
+        <picture class="hero-art">
+          <source srcset="/pigeon-704.webp 704w, /pigeon.webp 1408w" sizes="(min-width: 960px) 46vw, 92vw" type="image/webp" />
+          <img src="/pigeon.jpg" width="1408" height="768" alt="Line drawing of a pigeon wearing a mail carrier's cap" />
+        </picture>
+      </section>
+
+      <section class="steps" aria-labelledby="how">
+        <h2 id="how">How it works</h2>
+        <ol>
+          <li>
+            <h3>Drop in your labels</h3>
+            <p>Drag PDFs or pictures onto the window, or browse for one or several. Each PDF page becomes one label, and blank pages are skipped.</p>
+          </li>
+          <li>
+            <h3>Check the preview</h3>
+            <p>White margins are trimmed off and every label is sized to exactly 4 × 6 in, turned to fit, with dashed lines to cut along.</p>
+          </li>
+          <li>
+            <h3>Print</h3>
+            <p>Pick your printer in the normal Windows dialog and keep the scale at 100%. Or save a print-ready PDF for later.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="papers" aria-labelledby="papers">
+        <h2 id="papers">Works with the paper you have</h2>
+        <table>
+          <thead><tr><th scope="col">Paper</th><th scope="col">Labels per sheet</th></tr></thead>
+          <tbody>
+            <tr><td>Letter, 8.5 × 11 in</td><td>2</td></tr>
+            <tr><td>A4</td><td>2</td></tr>
+            <tr><td>4 × 6 in label roll (thermal printers)</td><td>1</td></tr>
+          </tbody>
+        </table>
+        <p>Reads PDF, PNG, JPG, GIF and WebP. Saved PDFs keep barcodes as sharp vector art.</p>
+      </section>
+
+      <section class="private" aria-labelledby="private">
+        <h2 id="private">Your labels stay on your computer</h2>
+        <p>Pigeonslip has no network access, no accounts and no analytics. It only reads the files you give it and only writes the PDFs you save.</p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>Pigeonslip is a free tool from <a href="https://ravenburst.com">Ravenburst</a>. MIT licensed.</p>
+      <p>Not affiliated with the United States Postal Service, TikTok, eBay, Etsy or Pirate Ship. <a href="/privacy.html">Privacy</a></p>
+    </footer>
+  </body>
+</html>
