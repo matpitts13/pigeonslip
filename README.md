@@ -1,4 +1,8 @@
+<img src="build/brand/pigeonslip-icon.svg" alt="Pigeonslip logo" width="96" height="96">
+
 # Pigeonslip
+
+**Website:** https://pigeonslip.ravenburst.com · **Download:** [latest release](https://github.com/matpitts13/pigeonslip/releases/latest)
 
 A free Windows app that prints shipping labels at the standard USPS 4 × 6 in size, fitting as many as it can on each sheet.
 
