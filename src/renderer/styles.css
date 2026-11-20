@@ -1,0 +1,541 @@
+/* Labelsheet — calm desktop utility. Tokens first; the paper preview is always
+   light, because it shows what comes out of the printer. */
+
+:root {
+  color-scheme: light dark;
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+
+  --bg: light-dark(#eef0f2, #17191c);
+  --surface: light-dark(#ffffff, #212429);
+  --surface-2: light-dark(#f6f7f8, #1b1e22);
+  --line: light-dark(#d9dde2, #343941);
+  --line-strong: light-dark(#b9c0c8, #4a515b);
+  --text: light-dark(#1b1f24, #e9ecef);
+  --text-2: light-dark(#545c66, #a9b1ba);
+  --accent: light-dark(#0b5f73, #5cc3d9);
+  --accent-hover: light-dark(#084c5c, #7fd3e5);
+  --on-accent: light-dark(#ffffff, #0b1d22);
+  --accent-soft: light-dark(#e2f1f5, #183238);
+  --danger: light-dark(#b42318, #ff8a80);
+  --focus: light-dark(#0b5f73, #7fd3e5);
+  --desk: light-dark(#dfe3e7, #101215);
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --t-sm: 0.8125rem;
+  --t-md: 0.9375rem;
+  --t-lg: 1.25rem;
+  --shadow-sheet: 0 1px 2px rgb(0 0 0 / 0.12), 0 8px 24px rgb(0 0 0 / 0.1);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font: 400 var(--t-md) / 1.5 var(--font);
+  color: var(--text);
+  background: var(--bg);
+  accent-color: var(--accent);
+  caret-color: var(--accent);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+* {
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.sprite {
+  display: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Layout ---------- */
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "bar bar" "side preview";
+  height: 100vh;
+}
+
+.bar {
+  grid-area: bar;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-5);
+  padding: var(--s-3) var(--s-5);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  margin: 0;
+  font: 600 var(--t-lg) / 1.2 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.bar-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  margin-right: auto;
+}
+
+.bar-actions {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.side {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-height: 0;
+  padding: var(--s-4);
+  background: var(--surface-2);
+  border-right: 1px solid var(--line);
+}
+
+.preview {
+  grid-area: preview;
+  overflow: auto;
+  padding: var(--s-5) var(--s-6) var(--s-6);
+  background: var(--desk);
+}
+
+/* ---------- Controls ---------- */
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.field-label {
+  font-size: var(--t-sm);
+  color: var(--text-2);
+}
+
+select {
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  padding: 6px 10px;
+  min-height: 36px;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 36px;
+  cursor: pointer;
+}
+
+.check input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 38px;
+  padding: 0 var(--s-4);
+  font: 500 var(--t-md) / 1 var(--font);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: background-color 120ms var(--ease), border-color 120ms var(--ease);
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--text-2);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.btn-primary {
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.link-btn {
+  font: inherit;
+  font-size: var(--t-sm);
+  color: var(--accent);
+  background: none;
+  border: 0;
+  padding: var(--s-1) var(--s-2);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link-btn:hover {
+  color: var(--accent-hover);
+}
+
+/* ---------- Drop zone + list ---------- */
+
+.drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-1);
+  padding: var(--s-5) var(--s-4);
+  text-align: center;
+  background: var(--surface);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  transition: border-color 120ms var(--ease), background-color 120ms var(--ease);
+}
+
+.drop.is-over {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.drop-icon {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.drop-title {
+  margin: var(--s-1) 0 0;
+  font-weight: 600;
+}
+
+.drop-sub {
+  margin: 0 0 var(--s-3);
+  font-size: var(--t-sm);
+  color: var(--text-2);
+}
+
+.list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--s-2);
+}
+
+.list-title {
+  margin: 0;
+  font-size: var(--t-md);
+  font-weight: 600;
+}
+
+.list {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+.item-thumb {
+  width: 40px;
+  height: 60px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.item-text {
+  min-width: 0;
+}
+
+.item-name {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.item-meta {
+  margin: 0;
+  font-size: var(--t-sm);
+  color: var(--text-2);
+}
+
+.item-remove {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--text-2);
+  background: none;
+  border: 0;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+
+.item-remove:hover {
+  color: var(--danger);
+  background: var(--surface-2);
+}
+
+.item.is-loading {
+  color: var(--text-2);
+}
+
+.status {
+  margin: 0;
+  min-height: 1.5em;
+  font-size: var(--t-sm);
+  color: var(--text-2);
+}
+
+.status.is-error {
+  color: var(--danger);
+}
+
+/* ---------- Preview ---------- */
+
+.summary {
+  margin: 0 0 var(--s-4);
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.sheets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-6);
+  align-items: flex-start;
+}
+
+/* A sheet of paper: always light, sized by the paper's aspect ratio. */
+.sheet {
+  color-scheme: only light;
+  position: relative;
+  flex: none;
+  width: var(--sheet-w, 340px);
+  aspect-ratio: var(--paper-ratio, 8.5 / 11);
+  color: #1b1f24;
+  background: #fff;
+  box-shadow: var(--shadow-sheet);
+}
+
+.sheet-no {
+  position: absolute;
+  inset: auto 0 calc(-1 * var(--s-5)) 0;
+  font-size: var(--t-sm);
+  color: var(--text-2);
+  text-align: center;
+}
+
+.slot,
+.guide,
+.art {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--h);
+}
+
+.slot.is-empty {
+  display: grid;
+  place-items: center;
+  border: 1px dashed #c4cad1;
+  color: #6b737c;
+  font-size: var(--t-sm);
+  text-align: center;
+}
+
+.guide {
+  border: 1px dashed #9aa1a8;
+}
+
+.art {
+  display: block;
+  object-fit: fill;
+  transform: rotate(var(--turn, 0deg));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .art.is-new {
+    animation: land 220ms var(--ease) both;
+  }
+  @keyframes land {
+    from {
+      opacity: 0;
+      transform: rotate(var(--turn, 0deg)) scale(0.97);
+    }
+  }
+}
+
+/* Whole-window drop veil. */
+.drag-veil {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 3px dashed var(--accent);
+  pointer-events: none;
+}
+
+.drag-veil[hidden] {
+  display: none;
+}
+
+.drag-veil p {
+  padding: var(--s-3) var(--s-5);
+  font-weight: 600;
+  color: var(--on-accent);
+  background: var(--accent);
+  border-radius: var(--r-md);
+}
+
+.print-root {
+  display: none;
+}
+
+/* Narrow windows: stack the list above the preview. */
+@media (max-width: 860px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas: "bar" "side" "preview";
+    height: auto;
+    min-height: 100vh;
+  }
+  .side {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .list {
+    max-height: 240px;
+  }
+  .preview {
+    padding: var(--s-4);
+  }
+}
+
+/* ---------- Printing: only the sheets, at true size ---------- */
+@media print {
+  html,
+  body {
+    height: auto;
+    background: #fff;
+  }
+  .app,
+  .drag-veil {
+    display: none;
+  }
+  .print-root {
+    display: block;
+    color-scheme: only light;
+  }
+  .print-root .sheet {
+    width: var(--paper-w);
+    /* A hair short of the page, so rounding (A4 is not whole inches) can't spill a blank page. */
+    height: calc(var(--paper-h) - 0.02in);
+    aspect-ratio: auto;
+    box-shadow: none;
+    overflow: hidden;
+    break-after: page;
+  }
+  .print-root .sheet:last-child {
+    break-after: auto;
+  }
+  .print-root .art {
+    animation: none;
+  }
+}

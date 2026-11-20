@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'self' blob: data:; font-src 'self'"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Labelsheet</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <svg class="sprite" aria-hidden="true">
+      <symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V3h12v6" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="7" rx="1" /></symbol>
+      <symbol id="i-save" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5" /><path d="M12 11v6" /><path d="m9 14 3 3 3-3" /></symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4" /><path d="m7 9 5-5 5 5" /><path d="M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" /></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12" /><path d="M18 6 6 18" /></symbol>
+    </svg>
+
+    <div class="app" id="app">
+      <header class="bar">
+        <h1 class="brand">Labelsheet</h1>
+        <div class="bar-controls">
+          <label class="field">
+            <span class="field-label">Paper</span>
+            <select id="paper"></select>
+          </label>
+          <label class="check"><input type="checkbox" id="trim" checked /> Trim white margins</label>
+          <label class="check"><input type="checkbox" id="guides" checked /> Cut lines</label>
+        </div>
+        <div class="bar-actions">
+          <button type="button" class="btn" id="save" disabled title="Ctrl+S">
+            <svg class="icon" aria-hidden="true"><use href="#i-save" /></svg>Save PDF
+          </button>
+          <button type="button" class="btn btn-primary" id="print" disabled title="Ctrl+P">
+            <svg class="icon" aria-hidden="true"><use href="#i-printer" /></svg>Print labels
+          </button>
+        </div>
+      </header>
+
+      <aside class="side" aria-label="Labels">
+        <div class="drop" id="drop">
+          <svg class="drop-icon" aria-hidden="true"><use href="#i-upload" /></svg>
+          <p class="drop-title">Drop label PDFs or pictures here</p>
+          <p class="drop-sub">Each page becomes one 4 × 6 in label.</p>
+          <button type="button" class="btn" id="browse" title="Ctrl+O">Browse files…</button>
+          <input type="file" id="file" class="visually-hidden" multiple accept=".pdf,application/pdf,image/png,image/jpeg,image/gif,image/webp" tabindex="-1" />
+        </div>
+        <div class="list-head">
+          <h2 class="list-title" id="count">No labels yet</h2>
+          <button type="button" class="link-btn" id="clear" hidden>Remove all</button>
+        </div>
+        <ul class="list" id="list"></ul>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </aside>
+
+      <main class="preview" id="preview" aria-label="Print preview">
+        <p class="summary" id="summary"></p>
+        <div class="sheets" id="sheets"></div>
+      </main>
+    </div>
+
+    <div class="drag-veil" id="veil" hidden><p>Drop to add labels</p></div>
+    <div class="print-root" id="print-root" aria-hidden="true"></div>
+  </body>
+</html>
