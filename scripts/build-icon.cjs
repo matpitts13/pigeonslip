@@ -53,11 +53,15 @@ app.disableHardwareAcceleration();
 app.whenReady().then(async () => {
   try {
     const r = await renderer(fs.readFileSync(path.join(DIR, "icon.svg"), "utf8"));
+    // Optional close-up with bolder lines for title bars and tabs (32 px and below).
+    const smallFile = path.join(DIR, "icon-small.svg");
+    const small = fs.existsSync(smallFile) ? await renderer(fs.readFileSync(smallFile, "utf8")) : r;
     fs.writeFileSync(path.join(DIR, "icon.png"), await r.render(512));
     const ico = [];
-    for (const size of ICO_SIZES) ico.push({ size, data: await r.render(size) });
+    for (const size of ICO_SIZES) ico.push({ size, data: await (size <= 32 ? small : r).render(size) });
     fs.writeFileSync(path.join(DIR, "icon.ico"), buildIco(ico));
     r.close();
+    if (small !== r) small.close();
     console.log("Wrote build/icon.png and build/icon.ico");
     app.exit(0);
   } catch (e) {
