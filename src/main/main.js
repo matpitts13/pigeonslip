@@ -87,6 +87,10 @@ function smokeTest(win, outFile, files) {
       await wait(500);
     }
     fs.writeFileSync(outFile, (await win.webContents.capturePage()).toPNG());
+    // The feedback menu opens under its button.
+    await win.webContents.executeJavaScript(`document.getElementById("feedback-menu").showPopover()`);
+    await wait(200);
+    fs.writeFileSync(outFile.replace(/\.png$/, "-feedback.png"), (await win.webContents.capturePage()).toPNG());
     console.log(problems.length ? `SMOKE problems:\n${problems.join("\n")}` : "SMOKE ok: no console errors");
     app.exit(problems.length ? 1 : 0);
   });

@@ -31,6 +31,11 @@
           <label class="check"><input type="checkbox" id="guides" checked /> Cut lines</label>
         </div>
         <div class="bar-actions">
+          <button type="button" class="link-btn feedback-btn" popovertarget="feedback-menu">Feedback</button>
+          <div class="menu" id="feedback-menu" popover>
+            <button type="button" class="menu-item" data-feedback="bug">Report a problem</button>
+            <button type="button" class="menu-item" data-feedback="feedback">Send feedback</button>
+          </div>
           <button type="button" class="btn" id="save" disabled title="Ctrl+S">
             <svg class="icon" aria-hidden="true"><use href="#i-save" /></svg>Save PDF
           </button>

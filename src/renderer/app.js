@@ -416,6 +416,19 @@ el.trim.addEventListener("change", () => {
   savePrefs();
   enqueue(reloadAll);
 });
+// Feedback menu: the main process opens a ready-made email in the user's mail app.
+const feedbackMenu = $("feedback-menu");
+feedbackMenu.addEventListener("click", async (e) => {
+  const kind = /** @type {HTMLElement} */ (e.target).closest("[data-feedback]")?.dataset.feedback;
+  if (!kind) return;
+  feedbackMenu.hidePopover();
+  try {
+    await window.api.feedback(kind);
+    setStatus("Opening your email app… If nothing opens, write to support@ravenburst.com.");
+  } catch (err) {
+    setStatus(`Couldn't open your email app. Write to support@ravenburst.com. (${err instanceof Error ? err.message : err})`, true);
+  }
+});
 el.print.addEventListener("click", printLabels);
 el.save.addEventListener("click", savePdf);
 

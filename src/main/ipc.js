@@ -1,13 +1,17 @@
-// The only two things the window can ask the main process to do: save the
-// finished PDF, and print the sheets. Every payload is checked here before use.
-import { BrowserWindow, app, dialog, ipcMain } from "electron";
+// The only things the window can ask the main process to do: save the
+// finished PDF, print the sheets, and open a feedback email. Every payload is
+// checked here before use.
+import { BrowserWindow, app, dialog, ipcMain, shell } from "electron";
 import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
+import { checkFeedbackPayload, feedbackMailto } from "./feedback.js";
 import { PRINT_SIZES, checkPrintPayload, checkSavePayload } from "./validate.js";
 
 export const CHANNELS = {
   savePdf: "labels:save-pdf",
   print: "labels:print",
+  feedback: "labels:feedback",
 };
 
 /**
@@ -18,6 +22,8 @@ function handle(channel, fn) {
   ipcMain.removeHandler(channel);
   ipcMain.handle(channel, async (e, p) => {
     try {
+      // Only Pigeonslip's own page may ask.
+      if (!e.senderFrame?.url.startsWith("app://pigeonslip/")) throw new Error("Not allowed.");
       return { ok: true, value: await fn(e, p) };
     } catch (err) {
       return { ok: false, error: err instanceof Error ? err.message : String(err) };
@@ -38,6 +44,13 @@ export function registerIpc() {
     if (r.canceled || !r.filePath) return { saved: false };
     await fs.writeFile(r.filePath, bytes);
     return { saved: true, path: r.filePath };
+  });
+
+  handle(CHANNELS.feedback, async (_e, p) => {
+    const { kind } = checkFeedbackPayload(p);
+    const info = { appName: "Pigeonslip", version: app.getVersion(), os: `Windows ${os.release()} (${process.arch}), Electron ${process.versions.electron}` };
+    await shell.openExternal(feedbackMailto(kind, info));
+    return { opened: true };
   });
 
   handle(CHANNELS.print, async (e, p) => {

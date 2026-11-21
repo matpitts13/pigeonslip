@@ -548,3 +548,48 @@ select {
     animation: none;
   }
 }
+
+/* ---------- Feedback menu (a popover anchored under its button) ---------- */
+.feedback-btn {
+  anchor-name: --feedback;
+  align-self: center;
+  min-height: 38px;
+  margin-right: var(--s-2);
+}
+
+.menu {
+  position-anchor: --feedback;
+  inset: auto;
+  top: anchor(bottom);
+  right: anchor(right);
+  margin: 4px 0 0;
+  padding: var(--s-1);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+}
+
+.menu:popover-open {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  min-height: 36px;
+  padding: 0 var(--s-3);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  white-space: nowrap;
+  background: none;
+  border: 0;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+
+.menu-item:hover,
+.menu-item:focus-visible {
+  background: var(--surface-2);
+}

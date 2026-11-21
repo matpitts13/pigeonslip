@@ -1,6 +1,6 @@
 {
   "name": "pigeonslip",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "A free desktop app that prints shipping labels at the standard 4 x 6 in size, as many per sheet as fit. Drop in label PDFs or pictures, check the preview, print.",
   "license": "MIT",
